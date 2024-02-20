@@ -7,10 +7,16 @@ import React, { useState, useRef } from 'react'
 
 
 function App() {
-  const [todos, setTodos] = useState([{ id: 1, name: 'Todo 1', complete: false}])
+  const [todos, setTodos] = useState([])
+  const todoNameRef = useRef();
 
   function handleAddTodo(e) {
-    
+    const name = todoNameRef.current.value
+    if (name === '') return
+    setTodos(prevTodos => {
+      return [...prevTodos, {id: 1, name: name, complete: false}]
+    })
+    todoNameRef.current.value = null
   }
 
   return (
@@ -21,7 +27,7 @@ function App() {
 
         <Todolist todos={todos}  />
         <div className="flex justify-evenly items-center space-x-3">
-             <input type="text" className="rounded-md h-8 w-52 p-2" />
+             <input type="text" ref={todoNameRef} className="rounded-md h-8 w-52 p-2" />
              <button onClick={handleAddTodo} className="my-5 p-2 rounded-md font-bold text-white border border-green-600">ADD</button>
              <button className="my-5 p-2 rounded-md font-bold text-white border border-red-600">DELETE</button>
        </div>
