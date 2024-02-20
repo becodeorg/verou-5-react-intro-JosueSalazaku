@@ -2,7 +2,7 @@ import HeaderComponents from '/Users/josuesalazaku/Developer/BeCode/Summerpastur
 import FooterComponents from '/Users/josuesalazaku/Developer/BeCode/Summerpastures/verou-5-react-intro-josuesalazaku/src/Components/FooterComponents.js'
 import Todolist from './Components/Todolist.js'
 import TodoComponents from '/Users/josuesalazaku/Developer/BeCode/Summerpastures/verou-5-react-intro-josuesalazaku/src/Components/TodoComponents.js';
-
+import { v4 as uuidv4 } from 'uuid';
 import React, { useState, useRef } from 'react'
 
 
@@ -11,12 +11,13 @@ function App() {
   const todoNameRef = useRef();
 
   function handleAddTodo(e) {
-    const name = todoNameRef.current.value
-    if (name === '') return
-    setTodos(prevTodos => {
-      return [...prevTodos, {id: 1, name: name, complete: false}]
-    })
-    todoNameRef.current.value = null
+    const name = todoNameRef.current.value;
+    if (name === '') return;
+    setTodos((prevTodos) => {
+      return [...prevTodos, { id: uuidv4(), name: name, complete: false }];
+    });
+
+    todoNameRef.current.value = ''; // Setting it to an empty string, as it's a controlled input.
   }
 
   return (
