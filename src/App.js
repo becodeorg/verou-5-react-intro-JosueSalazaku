@@ -12,6 +12,7 @@ function App() {
 
   function handleAddTodo(e) {
     const name = todoNameRef.current.value;
+    console.log(name)
     if (name === '') return;
     setTodos((prevTodos) => {
       return [...prevTodos, { id: uuidv4(), name: name, complete: false }];
