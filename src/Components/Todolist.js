@@ -2,6 +2,7 @@ import React from "react";
 import Todo from "./TodoComponents";
 
 export default function Todolist({ todos }) {
+
   return (
     <div className="text-white font-bold">
       {todos.map((todo) => (
@@ -10,3 +11,4 @@ export default function Todolist({ todos }) {
     </div>
   );
 }
+
