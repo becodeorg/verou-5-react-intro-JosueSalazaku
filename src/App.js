@@ -5,7 +5,7 @@ import FooterComponents from "/Users/josuesalazaku/Developer/BeCode/Summerpastur
 import Todolist from "./Components/Todolist.js";
 import TodoComponents from "/Users/josuesalazaku/Developer/BeCode/Summerpastures/verou-5-react-intro-josuesalazaku/src/Components/TodoComponents.js";
 
-const LOCAL_STORAGE_KEY = "todos";
+const LOCAL_STORAGE_KEY = "todoApp.todos";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -21,22 +21,22 @@ function App() {
   };
 
   useEffect(() => {
-    try {
-      const storedTodos =
-        JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
-      console.log("Stored Todos:", storedTodos);
-      setTodos(storedTodos);
-    } catch (error) {
-      console.error("Error reading from localStorage:", error);
-    }
+    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    console.log("Stored Todos:", storedTodos);
+    if (storedTodos) setTodos(storedTodos);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos), (error) => {
-      if (error) {
-        console.error("Error saving to localStorage:", error);
-      }
-    });
+    const saveTodosToLocalStorage = () => {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+    };
+
+    // Save todos to localStorage when the component unmounts
+    window.addEventListener("beforeunload", saveTodosToLocalStorage);
+
+    return () => {
+      window.removeEventListener("beforeunload", saveTodosToLocalStorage);
+    };
   }, [todos]);
 
   return (
