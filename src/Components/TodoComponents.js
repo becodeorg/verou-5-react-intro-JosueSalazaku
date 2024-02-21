@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function Todo({ todo }) {
+export default function Todo({ todo, checkboxTodos }) {
   if (!todo) {
     return null;
   }
 
-  const handleCheckboxChange = () => {
-    // Handle the change here if needed
+  const handleTodoClick = () => {
+    checkboxTodos(todo.id);
   };
 
   return (
@@ -14,8 +14,8 @@ export default function Todo({ todo }) {
       <section className="text-2xl space-x-2 py-5">
         <input
           type="checkbox"
-          checked={false}
-          onChange={handleCheckboxChange}
+          checked={todo.complete}
+          onChange={handleTodoClick}
         ></input>
         {todo.name}
       </section>

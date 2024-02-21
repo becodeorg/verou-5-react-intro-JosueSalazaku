@@ -20,6 +20,13 @@ function App() {
     todoNameRef.current.value = "";
   };
 
+  const checkboxTodos = (id) => {
+    const newTodos = [...todos];
+    const todo = newTodos.find((todo) => todo.id === id);
+    todo.complete = !todo.complete;
+    setTodos(newTodos);
+  };
+
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     console.log("Stored Todos:", storedTodos);
@@ -44,7 +51,7 @@ function App() {
       <HeaderComponents />
       <main className="flex flex-col justify-center items-center h-full">
         <h1 className="text-white text-6xl pb-20">My to do's</h1>
-        <Todolist todos={todos} />
+        <Todolist todos={todos} checkboxTodos={checkboxTodos} />
         <div className="flex justify-evenly items-center space-x-3">
           <input
             type="text"
