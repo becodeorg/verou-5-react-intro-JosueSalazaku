@@ -18,6 +18,15 @@ app.get('/', (req, res) => {
     res.send("Hello World")
 })
 
+app.get("/todos", (req, res) => {
+    const todos = [
+      { id: 1, text: "Todo 1", completed: false },
+      { id: 2, text: "Todo 2", completed: true },
+      // ... more todos
+    ];
+    res.json(todos);
+  });
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
