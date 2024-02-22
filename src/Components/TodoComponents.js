@@ -11,14 +11,16 @@ export default function Todo({ todo, checkboxTodos }) {
 
   return (
     <div className="text-white font-bold">
-      <section className="text-2xl space-x-2 py-5">
+      <section className="text-2xl py-5">
         <input
           type="checkbox"
           checked={todo.complete}
           onChange={handleTodoClick}
+          style={{ marginRight: '12px' }} // Adjust the value as needed
         ></input>
         {todo.name}
       </section>
     </div>
   );
+  
 }
