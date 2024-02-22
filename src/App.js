@@ -27,6 +27,11 @@ function App() {
     setTodos(newTodos);
   };
 
+  const clearAllTodos = () => {
+    setTodos([]);
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+  }
+
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     console.log("Stored Todos:", storedTodos);
@@ -50,7 +55,7 @@ function App() {
     <div className="App h-screen bg-zinc-900 flex flex-col">
       <HeaderComponents />
       <main className="flex flex-col justify-center items-center h-full">
-        <h1 className="text-white text-6xl pb-20">My to do's</h1>
+        <h1 className="text-white font-extrabold text-6xl pb-20">My to do's</h1>
         <Todolist todos={todos} checkboxTodos={checkboxTodos} />
         <div className="flex justify-evenly items-center space-x-3">
           <input
@@ -64,8 +69,8 @@ function App() {
           >
             ADD
           </button>
-          <button className="my-5 p-2 rounded-md font-bold text-white border border-red-600">
-            DELETE
+          <button onClick={clearAllTodos} className="my-5 p-2 rounded-md font-bold text-white border border-red-600">
+            Clear All
           </button>
         </div>
         <TodoComponents />
